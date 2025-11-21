@@ -26,3 +26,6 @@ tmp/
 
 # XAMPP
 /xampp/
+
+# Ignore any nested git backups
+/view/Front Office/.git.backup/
