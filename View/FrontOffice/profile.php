@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>GameBridge | All Users</title>
-  <link rel="stylesheet" href="styleAdmin.css" />
+  <title>GameBridge | My Profile</title>
+  <link rel="stylesheet" href="../../public/css/stylePro.css" />
   <style>
     /* ===== USER DASHBOARD PAGE ===== */
     body {
       background: #0c0c0c;
       color: var(--text);
       font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     section {
@@ -35,6 +37,13 @@
       box-shadow: 0 0 20px #1aff8720;
       margin-bottom: 50px;
       flex-wrap: wrap;
+    }
+
+    .logo{
+
+      width: 40px;
+      height: 40px;
+  
     }
 
     .avatar {
@@ -96,6 +105,8 @@
       border-left: 3px solid var(--accent);
       padding-left: 10px;
       margin-bottom: 25px;
+      text-align: left;
+
     }
 
     /* ===== Games Grid ===== */
@@ -218,77 +229,86 @@
 <body>
   <header>
     <div class="logo-container">
-      <img src="logo.png" alt="Logo">
+      <img src="../../public/images/logo.png" alt="Logo" class="logo">
     </div>
-    <nav>
+    <nav> 
       <a href="../index.html">Home</a>
       <a href="games.html">Games</a>
       <a href="tournaments.html">Tournaments</a>
       <a href="community.html">Community</a>
-      <a href="my_profile.html">My Profile</a>
+      <a href="users.html" class="active">My Profile</a>
       <a href="feedback.html">Feedback</a>
       <a href="rewards.html">Rewards</a>
     </nav>
   </header>
 
-  <!-- Users list only page -->
-  <section style="padding:40px 10%;">
-    <h2 style="font-family: 'Orbitron', sans-serif; color:var(--accent); margin-bottom:20px;">All Users</h2>
-    <div id="users-list" class="games-grid"></div>
+  <section>
+    <!-- ===== Profile Header ===== -->
+    <div class="profile-header">
+      <img src="../../public/images/avatar.jpg" alt="User Avatar" class="avatar">
+      <div class="profile-info">
+        <h1>@UnityForgeDev</h1>
+        <p>Indie Game Developer | Joined March 2024</p>
+        <span class="role-badge">Developer</span>
+        <div class="xp-bar"><div class="xp-fill"></div></div>
+        <p style="font-size:0.8rem; color:#888;">Level 7 • XP: 650/1000</p>
+      </div>
+    </div>
+    
+
+    <!-- ===== Uploaded Games ===== -->
+    <div class="dashboard-section">
+      <h2>🎮 Uploaded Games</h2>
+      <div class="games-grid">
+        <div class="game-card">
+          <img src="../../public/images/game1.jpg" alt="Game Cover">
+          <h3>Monster Dream</h3>
+          <p>Downloads: 2.3K | Rating: 4.8⭐</p>
+        </div>
+        <div class="game-card">
+          <img src="../../public/images/game2.jpg" alt="Game Cover">
+          <h3>Memories & Quest</h3>
+          <p>Downloads: 1.1K | Rating: 4.5⭐</p>
+        </div>
+        <div class="game-card">
+          <img src="../../public/images/game3.jpg" alt="Game Cover">
+          <h3>Dead Curse</h3>
+          <p>Downloads: 3.9K | Rating: 4.9⭐</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Tournaments ===== -->
+    <div class="dashboard-section">
+      <h2>🏆 Tournaments Joined</h2>
+      <div class="list">
+        <div class="list-item"><p>Cyber Clash 2025</p><span>Top 10%</span></div>
+        <div class="list-item"><p>Neon Rush Cup</p><span>Champion</span></div>
+        <div class="list-item"><p>Retro Revival Jam</p><span>Participant</span></div>
+      </div>
+    </div>
+
+    <!-- ===== Feedback ===== -->
+    <div class="dashboard-section">
+      <h2>🐞 Recent Feedback</h2>
+      <div class="list">
+        <div class="list-item"><p>Reported bug in “Monster Dream” – collision issue.</p><span>Fixed</span></div>
+        <div class="list-item"><p>Suggested new feature: cloud save sync.</p><span>Under Review</span></div>
+      </div>
+    </div>
+
+    <!-- ===== Achievements ===== -->
+    <div class="dashboard-section">
+      <h2>⭐ Achievements</h2>
+      <div class="achievements">
+        <div class="badge"><i>🏅</i>Top Dev</div>
+        <div class="badge"><i>🔥</i>Active User</div>
+        <div class="badge"><i>💬</i>Community Hero</div>
+        <div class="badge"><i>🎯</i>Precision Coder</div>
+      </div>
+    </div>
   </section>
 
   <footer>© 2025 GameBridge • Developed by Team UnityForge</footer>
-
-  <script>
-    (function(){
-      const users = [
-        {username:'LunaDev', display:'@LunaDev', role:'Developer', joined:'Jan 2024', level:8, xp:'820/1200', status:'Active'},
-        {username:'Player123', display:'@Player123', role:'Player', joined:'May 2024', level:3, xp:'210/500', status:'Active'},
-        {username:'AceGamer', display:'@AceGamer', role:'Developer', joined:'Jul 2023', level:12, xp:'1400/1500', status:'Suspended'},
-        {username:'UnityForgeDev', display:'@UnityForgeDev', role:'Developer', joined:'Mar 2024', level:7, xp:'650/1000', status:'Active'}
-      ];
-
-      const container = document.getElementById('users-list');
-      if(!container) return;
-
-      function createCard(u, idx) {
-        const card = document.createElement('div');
-        card.className = 'game-card';
-        card.innerHTML = `
-          <img src="${u.avatar}" alt="${u.display} avatar">
-          <h3>${u.display}</h3>
-          <p>${u.role} • Joined ${u.joined}</p>
-          <p class="user-status" style="color:#888; font-size:0.95rem; margin-top:6px;">Status: <strong>${u.status}</strong></p>
-          <p style="color:#888; font-size:0.85rem;">Level ${u.level} • XP: ${u.xp}</p>
-          <div style="margin-top:10px; display:flex; gap:8px;">
-            <a href="user_update.html?user=${u.username}" style="text-decoration:none"><button class="btn-update" style="padding:6px 10px; border-radius:6px; border:2px solid var(--accent); background:transparent; color:var(--accent);">Update</button></a>
-            <button class="btn-delete" data-idx="${idx}" style="padding:6px 10px; border-radius:6px; border:2px solid #ff4d4d; background:transparent; color:#ff4d4d;">Delete</button>
-          </div>
-        `;
-        return card;
-      }
-
-      users.forEach((u, i)=>{
-        const card = createCard(u,i);
-        container.appendChild(card);
-      });
-
-      // Delegate click for delete
-      container.addEventListener('click', function(e){
-        const btn = e.target.closest('.btn-delete');
-        if(!btn) return;
-        const idx = parseInt(btn.getAttribute('data-idx'),10);
-        if(isNaN(idx)) return;
-        const user = users[idx];
-        if(!user) return;
-        // Remove user from array and UI (simulate delete)
-        users.splice(idx,1);
-        const card = btn.closest('.game-card');
-        if(card && card.parentNode) card.parentNode.removeChild(card);
-        // Rebuild container indexes so data-idx remains consistent
-        Array.from(container.querySelectorAll('.btn-delete')).forEach((b, i)=> b.setAttribute('data-idx', i));
-      });
-    })();
-  </script>
- </body>
- </html>
+</body>
+</html>

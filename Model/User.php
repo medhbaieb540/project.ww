@@ -8,13 +8,20 @@ class User {
         private string $email;
         private string $password;
         private string $user_role;
+        private string $birth_date;
+        private string $address;
+        private string $gender;
+        
 
-        public function __construct(?int $id, string $username, string $email, string $password,string $user_role){
+        public function __construct(?int $id, string $username, string $email, string $password,string $user_role,string $birth_date,string $address,string $gender){
             $this->id=$id;
             $this->username=$username;
             $this->email=$email;
             $this->password=$password;
             $this->user_role=$user_role;
+            $this->birth_date=$birth_date;
+            $this->address=$address;
+            $this->gender=$gender;
         }
         
         /**
@@ -114,6 +121,71 @@ class User {
 
                 return $this;
         }
+
+            /**
+         * Get the value of birth_date
+         */ 
+        public function getBirth_date()
+        {
+                return $this->birth_date;
+        }
+
+        /**
+         * Set the value of birth_date
+         *
+         * @return  self
+         */ 
+        public function setBirth_date($birth_date)
+        {
+                $this->birth_date = $birth_date;
+
+                return $this;
+        }
+
+       
+        /**
+         * Get the value of address
+         */ 
+        public function getAddress()
+        {
+                return $this->address;
+        }
+
+        /**
+         * Set the value of address
+         *
+         * @return  self
+         */ 
+        public function setAddress($address)
+        {
+                $this->address = $address;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of gender
+         */ 
+        public function getGender()
+        {
+                return $this->gender;
+        }
+
+        /**
+         * Set the value of gender
+         *
+         * @return  self
+         */ 
+        public function setGender($gender)
+        {
+                $this->gender = $gender;
+
+                return $this;
+        }
+
+        
+
+    
 }
 
 

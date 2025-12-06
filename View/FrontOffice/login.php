@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/../../controller/UserController.php';
+require_once __DIR__ . '/../../Controller/UserController.php';
 require_once __DIR__ . '/../../config.php';
 
 $userC = new UserController();
