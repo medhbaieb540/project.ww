@@ -21,15 +21,15 @@ $email = $_GET['email'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (
-        isset($_POST['password'], $_POST['confirm_password']) &&
-        !empty($_POST['password']) &&
+        isset($_POST['new_password'], $_POST['confirm_password']) &&
+        !empty($_POST['new_password']) &&
         !empty($_POST['confirm_password'])
     ) {
 
-        if ($_POST['password'] !== $_POST['confirm_password']) {
+        if ($_POST['new_password'] !== $_POST['confirm_password']) {
             $message = "Passwords do not match.";
         } else {
-            $newPass = $_POST['password'];
+            $newPass = $_POST['new_password'];
 
             // محاولة تحديث كلمة المرور
             $ok = $reset->resetPassword($email, $token, $newPass);

@@ -18,26 +18,26 @@ class UserController {
     $sql = "SELECT * FROM login WHERE 1=1";
     $params = [];
 
-    // 🔍 search by username or email
+
     if ($search !== '') {
         $sql .= " AND (username LIKE :search OR email LIKE :search)";
         $params[':search'] = '%' . $search . '%';
     }
 
-    // 🎭 filter by role
+
     if ($role !== '') {
         $sql .= " AND user_role = :role";
         $params[':role'] = $role;
     }
 
-    // 🚫 filter by status (active / banned)
+
     if ($status === 'active') {
         $sql .= " AND (is_banned IS NULL OR is_banned = 0)";
     } elseif ($status === 'banned') {
         $sql .= " AND is_banned = 1";
     }
 
-    // 🔽 sorting
+
     $allowedSort = ['username', 'email', 'user_role', 'birth_date'];
     $sortDir     = strtoupper($sortDir) === 'DESC' ? 'DESC' : 'ASC';
 
@@ -51,86 +51,6 @@ class UserController {
     $query->execute($params);
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
-    public function searchUsers($keyword)
-{
-    $sql = "SELECT * FROM login 
-            WHERE username LIKE :key 
-               OR email LIKE :key";
-
-    $db = config::getConnexion();
-    $query = $db->prepare($sql);
-
-    $searchWord = "%" . $keyword . "%";
-
-    $query->execute([
-        ':key' => $searchWord
-    ]);
-
-    return $query->fetchAll();
-}
-
-
-public function listUsers($sortField = null, $sortDir = 'ASC')
-{
-    $db = config::getConnexion();
-
-    // الحقول المسموح نرتّب عليها
-    $allowedFields = ['id', 'username', 'email', 'birth_date', 'user_role'];
-    $allowedDir    = ['ASC', 'DESC'];
-
-    if (!in_array($sortField, $allowedFields)) {
-        $sortField = 'id';   // ديفولت
-    }
-
-    $sortDir = strtoupper($sortDir);
-    if (!in_array($sortDir, $allowedDir)) {
-        $sortDir = 'ASC';
-    }
-
-    // انتبه: لازم نتحقق من الأسماء قبل ما نحطهم في الـ SQL
-    $sql = "SELECT * FROM login ORDER BY $sortField $sortDir";
-
-    try {
-        $query = $db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        die("Error fetching users: " . $e->getMessage());
-    }
-}
-
-public function filterUsers($role = null, $status = null)
-{
-    $db = config::getConnexion();
-
-    $sql = "SELECT * FROM login WHERE 1=1";
-    $params = [];
-
-    // Filter by Role
-    if (!empty($role)) {
-        $sql .= " AND user_role = :role";
-        $params[':role'] = $role;
-    }
-
-    // Filter by status (Active / Banned)
-    if ($status === "active") {
-        $sql .= " AND (is_banned IS NULL OR is_banned = 0)";
-    } elseif ($status === "banned") {
-        $sql .= " AND is_banned = 1";
-    }
-
-    $sql .= " ORDER BY id DESC";
-
-    try {
-        $query = $db->prepare($sql);
-        $query->execute($params);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        die("Filter error: " . $e->getMessage());
-    }
 }
 
 
@@ -168,18 +88,18 @@ public function getUserByEmail(string $email)
 
 
 
-    // public function listUsers() {
-    //     $sql = "SELECT * FROM `login` WHERE user_role != 'super_admin'";
-    //     $db = config::getConnexion();
-    //     try {
-    //         $list = $db->prepare($sql);
-    //         $list->execute();
-    //         return $list->fetchAll();
+    public function listUsers() {
+        $sql = "SELECT * FROM `login` WHERE user_role != 'super_admin'";
+        $db = config::getConnexion();
+        try {
+            $list = $db->prepare($sql);
+            $list->execute();
+            return $list->fetchAll();
 
-    //     } catch (Exception $e) {
-    //         die('Erreur: ' . $e->getMessage());
-    //     }
-    // }
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
 
 
    public function deleteUser(int $id){
@@ -296,6 +216,21 @@ public function unbanUser($id) {
     }
 }
 
+public function updateUserPassword($id, $hashedPassword)
+{
+    $sql = "UPDATE login SET password = :password WHERE id = :id";
+    $db  = config::getConnexion();
+
+    try {
+        $query = $db->prepare($sql);
+        $query->execute([
+            ':password' => $hashedPassword,
+            ':id'       => $id
+        ]);
+    } catch (Exception $e) {
+        die("Password update error: " . $e->getMessage());
+    }
+}
 
  
 

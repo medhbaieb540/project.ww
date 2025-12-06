@@ -23,10 +23,7 @@ if (!$user) {
 }
 
 if ((int)$user['is_banned'] !== 1) {
-    // مش محظور → ما نسمح بالحذف
-    // ممكن تبعت رسالة خطأ لو حاب
-    // مثلا باستخدام session
-    // $_SESSION['error'] = "You must ban the user before deleting.";
+    
     header('Location: ../FrontOffice/admin.php?section=users');
     exit;
 }

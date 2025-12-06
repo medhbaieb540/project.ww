@@ -29,13 +29,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     var_dump(password_verify($password, $user['password']));
                     exit;
 
-                } else {
+                } elseif ($user['user_role'] == 'player' || $user['user_role'] == 'developer'){
+
+
+                    $_SESSION['user_id']   = $user['id'];
+                    $_SESSION['username']  = $user['username'];
+                    $_SESSION['email']     = $user['email'];
+                    $_SESSION['user_role'] = $user['user_role'];
+                    $_SESSION['user_id']   = $user['id'];
+                    $_SESSION['birth_date']  = $user['birthdate'];
+                    $_SESSION['address']     = $user['address'];
+                    $_SESSION['gender'] = $user['gender'];
+
+                    header("Location: profile.php"); 
+                    exit;
+
+                }else {
                     
                     $_SESSION['user_id']   = $user['id'];
                     $_SESSION['username']  = $user['username'];
                     $_SESSION['email']     = $user['email'];
                     $_SESSION['user_role'] = $user['user_role'];
-                    
+                    $_SESSION['user_id']   = $user['id'];
+                    $_SESSION['birth_date']  = $user['birthdate'];
+                    $_SESSION['address']     = $user['address'];
+                    $_SESSION['gender'] = $user['gender'];
 
                     header("Location: admin.php"); 
                     exit;

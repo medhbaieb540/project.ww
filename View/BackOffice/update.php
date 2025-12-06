@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username  = $_POST['username'];
     $email     = $_POST['email'];
     $role      = $_POST['user_role'];
-    $gender    = $_POST['gender'];
     $birth_date= $_POST['birthdate'];
     $address   = $_POST['address'];
+    $gender    = $_POST['gender'];
 
 
     
@@ -78,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label>Email</label>
     <input type="email" name="email" value="<?= $user['email'] ?>">
     
-<?php if ($currentRole === 'super_admin'): ?>
+    <?php if ($currentRole === 'super_admin'): ?>
     <label>New Password (optional)</label>
     <input type="password" name="password" placeholder="Enter new password">
-<?php endif; ?>
+    <?php endif; ?>
 
 
     <label>User Role</label>
@@ -90,6 +90,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <option value="player"   <?= $user['user_role']=='player' ? 'selected' : '' ?>>Player</option>
         <option value="developer" <?= $user['user_role']=='developer' ? 'selected' : '' ?>>Developer</option>
     </select>
+
+    <label>Birth Date</label>
+    <input type="date" name="birthdate" value="<?= $user['birth_date'] ?>">
+
+    <label>Address</label>
+    <input type="text" name="address" value="<?= $user['address'] ?>">
+
+    <label>Gender</label>
+    <select name="gender">
+    <option value="male"   <?= $user['gender'] === 'male' ? 'selected' : '' ?>>Male</option>
+    <option value="female" <?= $user['gender'] === 'female' ? 'selected' : '' ?>>Female</option>
+    </select>
+
+
 
     <button type="submit">Update</button>
 </form>

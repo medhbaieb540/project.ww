@@ -1,3 +1,26 @@
+<?php
+session_start();
+require_once '../../controller/UserController.php';
+
+$userC = new UserController();
+
+// تأكد إن فيه user عامل تسجيل دخول
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$userId = $_SESSION['user_id'];
+$user   = $userC->getUserById($userId);
+
+if (!$user) {
+    die("User not found");
+}
+
+$role = $user['user_role']; // player أو developer أو admin مثلاً
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -246,13 +269,26 @@
     <!-- ===== Profile Header ===== -->
     <div class="profile-header">
       <img src="../../public/images/avatar.jpg" alt="User Avatar" class="avatar">
-      <div class="profile-info">
-        <h1>@UnityForgeDev</h1>
-        <p>Indie Game Developer | Joined March 2024</p>
+        <div class="profile-info">
+    <h1>@<?= htmlspecialchars($user['username']) ?></h1>
+
+    <?php if ($role === 'developer'): ?>
+        <p>Indie Game Developer | Joined March 2025</p>
         <span class="role-badge">Developer</span>
-        <div class="xp-bar"><div class="xp-fill"></div></div>
-        <p style="font-size:0.8rem; color:#888;">Level 7 • XP: 650/1000</p>
-      </div>
+    <?php elseif ($role === 'player'): ?>
+        <p>Passionate Gamer | Joined March 2025</p>
+        <span class="role-badge">Player</span>
+    <?php else: ?>
+        <p>GameBridge Member</p>
+        <span class="role-badge"><?= htmlspecialchars(ucfirst($role)) ?></span>
+    <?php endif; ?>
+
+    <div class="xp-bar">
+        <div class="xp-fill"></div>
+    </div>
+    <p style="font-size:0.8rem; color:#888;">Level 7 • XP: 650/1000</p>
+  </div>
+ 
     </div>
     
 
