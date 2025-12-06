@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
   </div>
 
-  <script src="../../public/js/login.js?v=2"></script>
+  <!-- <script src="../../public/js/login.js?v=2"></script> -->
     
  
 </body>
