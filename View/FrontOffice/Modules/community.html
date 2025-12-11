@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GameBridge | Community</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      background: #0c0c0c;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+      padding: 80px 10%;
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      margin-bottom: 25px;
+    }
+
+    /* ===== Game Cards ===== */
+    .games-community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.3s;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00000055;
+    }
+
+    .game-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px #1aff8733;
+      transform: translateY(-4px);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .game-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .game-card p {
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .game-feedback {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+
+    .feedback-count {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ===== View All Games Button ===== */
+    .view-games-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      margin: 40px auto 60px;
+      font-size: 1rem;
+    }
+
+    .view-games-btn:hover {
+      background: #11cc66;
+      transform: translateY(-3px);
+    }
+
+    /* ===== Messages Section ===== */
+    .messages-section {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 0 20px #1aff8711;
+    }
+
+    .messages-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .messages-container {
+      max-height: 400px;
+      overflow-y: auto;
+      background: #0f0f0f;
+      border: 1px solid #1aff8715;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      background: #111;
+      border-radius: 10px;
+      padding: 12px 16px;
+      max-width: 75%;
+      line-height: 1.4;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #000;
+    }
+
+    .message.other {
+      align-self: flex-start;
+      border: 1px solid #1aff8720;
+      color: #ddd;
+    }
+
+    .message-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .message-input input {
+      flex: 1;
+      background: #111;
+      color: var(--accent);
+      border: 1px solid #1aff8715;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    .message-input input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px #1aff8722;
+    }
+
+    .message-input button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+
+    .message-input button:hover {
+      background: #11cc66;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/logo.png" alt="Logo">
+      <h1>GameBridge</h1>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="community.html" class="active">Community</a>
+      <a href="users.html">Users</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="rewards.html">Rewards</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>💬 Game Discussions</h2>
+
+    <!-- ===== Game Cards ===== -->
+    <div class="games-community-grid">
+      <div class="game-card">
+        <img src="../images/game1.jpg" alt="Monster Dream">
+        <h3>Monster Dream</h3>
+        <p>by @LunaDev</p>
+        <div class="game-feedback">
+          <span>Adventure</span>
+          <span class="feedback-count">23 Feedback</span>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <img src="../images/game3.jpg" alt="Dead Curse">
+        <h3>Dead Curse</h3>
+        <p>by @AceGamer</p>
+        <div class="game-feedback">
+          <span>Action</span>
+          <span class="feedback-count">41 Feedback</span>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <img src="../images/game2.jpg" alt="Memories & Quest">
+        <h3>Memories & Quest</h3>
+        <p>by @NovaBuilds</p>
+        <div class="game-feedback">
+          <span>Puzzle</span>
+          <span class="feedback-count">15 Feedback</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== View Games Button ===== -->
+    <div style="text-align:center;">
+      <a href="games.html" class="view-games-btn">🎮 View All Games</a>
+    </div>
+
+    <!-- ===== Messages Section ===== -->
+    <div class="messages-section">
+      <h2>💌 Send Messages</h2>
+      <div class="messages-container" id="messages">
+        <div class="message other">@Player123: Anyone joining the tournament tonight?</div>
+        <div class="message user">@You: Yeah! I’m updating my game first 👾</div>
+      </div>
+      <div class="message-input">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const sendBtn = document.getElementById("sendBtn");
+    const input = document.getElementById("messageInput");
+    const container = document.getElementById("messages");
+
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      const msg = document.createElement("div");
+      msg.classList.add("message", "user");
+      msg.textContent = "@You: " + text;
+      container.appendChild(msg);
+      input.value = "";
+      container.scrollTop = container.scrollHeight;
+    }
+  </script>
+</body>
+</html>

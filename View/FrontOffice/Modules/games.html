@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GameBridge | Games</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ===== GAMES PAGE ===== */
+    body {
+      background: #0c0c0c;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+      padding: 80px 10%;
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      margin-bottom: 25px;
+    }
+
+    /* ===== Games Grid ===== */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-bottom: 80px;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.3s;
+      box-shadow: 0 0 15px #00000055;
+    }
+
+    .game-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px #1aff8733;
+      transform: translateY(-4px);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .game-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .game-card p {
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .game-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .game-actions button {
+      flex: 1;
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      border-radius: 6px;
+      padding: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+
+    .game-actions button:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* ===== Upload Section ===== */
+    .upload-section {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 0 20px #1aff8711;
+    }
+
+    .upload-section h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form input[type="text"],
+    form textarea,
+    form input[type="file"] {
+      background: #111;
+      color: var(--accent);
+      border: 1px solid #1aff8715;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px #1aff8722;
+    }
+
+    form button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+
+    form button:hover {
+      background: #11cc66;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/logo.png" alt="Logo">
+
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="games.html"class="active">Games</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="community.html">Community</a>
+      <a href="users.html" >My Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="rewards.html" >Rewards</a>
+    </nav>
+  </header>
+
+  <section>
+    <!-- ===== Browse Games ===== -->
+    <h2>Browse Games</h2>
+    <div class="games-grid">
+      <div class="game-card">
+        <img src="../images/game1.jpg" alt="Neon Runner">
+        <h3>Neon Runner</h3>
+        <p>By <b>@DevFox</b> • Action • ★ 4.6</p>
+        <div class="game-actions">
+          <button>Play</button>
+          <button>Review</button>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <img src="../images/game2.jpg" alt="Memory Quest">
+        <h3>Memory Quest</h3>
+        <p>By <b>@LunaDev</b> • Puzzle • ★ 4.8</p>
+        <div class="game-actions">
+          <button>Play</button>
+          <button>Review</button>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <img src="../images/game3.jpg" alt="Dead Curse">
+        <h3>Dead Curse</h3>
+        <p>By <b>@AceGamer</b> • Horror • ★ 4.9</p>
+        <div class="game-actions">
+          <button>Play</button>
+          <button>Review</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Upload Game ===== -->
+    <div class="upload-section">
+      <h2>Upload New Game</h2>
+      <form>
+        <input type="text" placeholder="Game title" required>
+        <textarea placeholder="Description" rows="4" required></textarea>
+        <input type="file" accept=".zip,.rar,.exe,.apk" required>
+        <button type="submit">Upload Game</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

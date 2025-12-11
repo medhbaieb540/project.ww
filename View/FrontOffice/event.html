@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameBridge | Events</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="GameBridge Logo">
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="events.html" class="active">Events</a>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero events-hero">
+    <div class="hero-content">
+      <h2>Game Events & Community Meetups</h2>
+      <p>Welcome to our Events </p>
+    </div>
+  </section>
+
+  <!-- ===== Admin Controls ===== -->
+
+
+  <!-- ===== Event Form (Hidden by default) ===== -->
+<section id="eventFormSection" class="event-form-container hidden">
+  <div class="event-form-card">
+    <h3 id="formTitle">Create New Event</h3>
+    <form id="eventForm">
+      <input type="hidden" id="eventId" />
+      <div class="form-group">
+        <label for="eventTitle">Event Title *</label>
+        <input type="text" id="eventTitle" required placeholder="Enter event name">
+      </div>
+      <div class="form-group">
+        <label for="eventDate">Date & Time *</label>
+        <input type="datetime-local" id="eventDate" required>
+      </div>
+      <div class="form-group">
+        <label for="eventType">Event Type *</label>
+        <select id="eventType" required>
+          <option value="">Select type</option>
+          <option value="tournament">Tournament</option>
+          <option value="beta-test">Beta Test</option>
+          <option value="stream">Live Stream</option>
+          <option value="meetup">Community Meetup</option>
+          <option value="challenge">Challenge</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="eventDescription">Description *</label>
+        <textarea id="eventDescription" rows="4" required placeholder="Describe the event..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="eventImage">Event Image URL</label>
+        <input type="url" id="eventImage" placeholder="https://example.com/image.jpg">
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="join-btn">Save Event</button>
+        <button type="button" id="cancelBtn" class="secondary-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== Events List ===== -->
+<section class="events-section">
+  <div class="events-header">
+    <span class="tagline">UPCOMING</span>
+    <div>
+      <h2>All Events</h2>
+      <p>Discover and participate in our latest community events</p>
+    </div>
+  </div>
+
+  <div class="events-grid" id="eventsGrid">
+    <!-- Sample Event Card 1 -->
+    <div class="event-card" data-id="1">
+      <img src="images/event1.jpg" alt="Summer Speedrun Challenge">
+      <div class="event-content">
+        <span class="event-badge tournament">Tournament</span>
+        <h3>Summer Speedrun Challenge</h3>
+        <p class="event-date">📅 July 20, 2025 - 6:00 PM EST</p>
+        <p class="event-description">Compete in our monthly speedrun tournament featuring indie platformers. Prizes for top 3 finishers!</p>
+        <div class="event-actions">
+          <button class="join-btn">Join Event</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample Event Card 2 -->
+    <div class="event-card" data-id="2">
+      <img src="images/event2.jpg" alt="Indie Dev Q&A">
+      <div class="event-content">
+        <span class="event-badge stream">Live Stream</span>
+        <h3>Indie Dev Q&A Session</h3>
+        <p class="event-date">📅 July 22, 2025 - 8:00 PM EST</p>
+        <p class="event-description">Join our live stream with famous indie developers. Ask questions and get insights into game development.</p>
+        <div class="event-actions">
+          <button class="join-btn">Join Event</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample Event Card 3 -->
+    <div class="event-card" data-id="3">
+      <img src="images/event3.jpg" alt="Beta Test Weekend">
+      <div class="event-content">
+        <span class="event-badge beta-test">Beta Test</span>
+        <h3>Shadow Realm Beta Test</h3>
+        <p class="event-date">📅 July 25-27, 2025</p>
+        <p class="event-description">Exclusive weekend beta test for our upcoming RPG. Your feedback will shape the final release!</p>
+        <div class="event-actions">
+          <button class="join-btn">Join Event</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    © 2025 GameBridge • Developed by Team UnityForge
+  </footer>
+
+  <script>
+    // Simple JavaScript for form toggling and basic interactions
+    document.getElementById('addEventBtn').addEventListener('click', function() {
+      document.getElementById('eventFormSection').classList.remove('hidden');
+      document.getElementById('formTitle').textContent = 'Create New Event';
+      document.getElementById('eventForm').reset();
+      document.getElementById('eventId').value = '';
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+      document.getElementById('eventFormSection').classList.add('hidden');
+    });
+
+    document.getElementById('eventForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Here you would normally send data to your backend
+      alert('Event saved! (In production, this would save to database)');
+      document.getElementById('eventFormSection').classList.add('hidden');
+    });
+
+    function editEvent(id) {
+      document.getElementById('eventFormSection').classList.remove('hidden');
+      document.getElementById('formTitle').textContent = 'Edit Event';
+      // Here you would load event data from backend
+      alert('Loading event ' + id + ' for editing...');
+    }
+
+    function deleteEvent(id) {
+      if(confirm('Are you sure you want to delete this event?')) {
+        // Here you would delete from backend
+        alert('Event ' + id + ' deleted!');
+      }
+    }
+  </script>
+</body>
+</html>

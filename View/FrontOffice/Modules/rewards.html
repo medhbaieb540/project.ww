@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GameBridge | Rewards</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ===== REWARDS PAGE ===== */
+    body {
+      background: #0c0c0c;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+      padding: 80px 10%;
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    /* ===== User Summary ===== */
+    .reward-summary {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      box-shadow: 0 0 25px #1aff8711;
+      text-align: center;
+    }
+
+    .reward-summary h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+
+    .reward-summary p {
+      color: #ccc;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .xp-bar {
+      width: 100%;
+      background: #111;
+      border-radius: 10px;
+      height: 14px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      border: 1px solid #1aff8720;
+    }
+
+    .xp-progress {
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, #1aff87, #11cc66);
+      box-shadow: 0 0 10px #1aff8722;
+    }
+
+    .rank {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* ===== Rewards Grid ===== */
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .reward-card {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 25px 20px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 0 15px #00000055;
+    }
+
+    .reward-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px #1aff8733;
+      transform: translateY(-4px);
+    }
+
+    .reward-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 8px #1aff8755);
+    }
+
+    .reward-card h4 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .reward-card p {
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+
+    .claim-btn {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+
+    .claim-btn:hover {
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    /* ===== Footer Button ===== */
+    .back-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      margin: 60px auto 0;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background: #11cc66;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/logo.png" alt="Logo">
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="community.html">Community</a>
+      <a href="users.html" >My Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="rewards.html" class="active">Rewards</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2> My Rewards</h2>
+
+    <!-- ===== User Summary ===== -->
+    <div class="reward-summary">
+      <h3>@UnityForgeDev</h3>
+      <p>Total Points: <b>2,340 XP</b></p>
+      <div class="xp-bar">
+        <div class="xp-progress"></div>
+      </div>
+      <p class="rank">Level 5 • Rank: Silver Creator</p>
+    </div>
+
+    <!-- ===== Rewards Grid ===== -->
+    <div class="rewards-grid">
+      <div class="reward-card">
+        <img src="../images/badge1.png" alt="Badge 1">
+        <h4>🏅 Beta Tester</h4>
+        <p>Awarded for joining 3 game tests.</p>
+        <button class="claim-btn">Claim</button>
+      </div>
+
+      <div class="reward-card">
+        <img src="../images/badge2.png" alt="Badge 2">
+        <h4>💎 Top Developer</h4>
+        <p>Earned after your game hits 500 plays.</p>
+        <button class="claim-btn">Claim</button>
+      </div>
+
+      <div class="reward-card">
+        <img src="../images/badge3.png" alt="Badge 3">
+        <h4>🔥 Feedback Hero</h4>
+        <p>Given for replying to 10 player reports.</p>
+        <button class="claim-btn">Claimed</button>
+      </div>
+
+      <div class="reward-card">
+        <img src="../images/badge4.png" alt="Badge 4">
+        <h4>🎯 Tournament Champion</h4>
+        <p>Win 1st place in any official tournament.</p>
+        <button class="claim-btn">Claim</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="users.html" class="back-btn">👤 Back to Profile</a>
+    </div>
+  </section>
+
+  <script>
+    // Simulate "Claim" button behavior
+    const claimButtons = document.querySelectorAll('.claim-btn');
+    claimButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.textContent === 'Claim') {
+          btn.textContent = 'Claimed';
+          btn.style.background = '#1aff87';
+          btn.style.color = '#000';
+          btn.style.borderColor = '#1aff87';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

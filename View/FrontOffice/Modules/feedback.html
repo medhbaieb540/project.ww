@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GameBridge | My Game Feedback</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ===== DEVELOPER FEEDBACK DASHBOARD ===== */
+    body {
+      background: #0c0c0c;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+      padding: 80px 10%;
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    /* ===== Feedback Grid ===== */
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .feedback-card {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px #00000055;
+      transition: 0.3s;
+    }
+
+    .feedback-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px #1aff8733;
+      transform: translateY(-3px);
+    }
+
+    .feedback-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .feedback-card p {
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .feedback-card small {
+      display: block;
+      color: #777;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-right: 6px;
+    }
+
+    .status-select {
+      background: #111;
+      color: var(--accent);
+      border: 1px solid #1aff8715;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .status-select:hover,
+    .status-select:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 10px #1aff8722;
+    }
+
+    /* ===== Save Button ===== */
+    .save-btn {
+      display: inline-block;
+      margin-top: 40px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .save-btn:hover {
+      background: #11cc66;
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 60px 8%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/logo.png" alt="Logo">
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="community.html">Community</a>
+      <a href="users.html">My Profile</a>
+      <a href="feedback.html" class="active">Feedback</a>
+      <a href="rewards.html">Rewards</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2> My Game Feedback Overview</h2>
+    <p style="text-align:center; color:#bbb; max-width:600px; margin:0 auto 40px;">
+      Manage player feedback for your uploaded games. Review issues, track progress, and mark them as fixed when solved.
+    </p>
+
+    <div class="feedback-grid" id="feedbackGrid">
+      <div class="feedback-card">
+        <h3>Neon Runner</h3>
+        <p>"The game crashes after level 3 boss fight. Please fix soon!"</p>
+        <small>By @Player123 • Submitted 2 days ago</small>
+        <label>Status:</label>
+        <select class="status-select">
+          <option value="pending" selected>Pending</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="fixed">Fixed</option>
+        </select>
+      </div>
+
+      <div class="feedback-card">
+        <h3>Memory Quest</h3>
+        <p>"Some levels load too slow on mobile."</p>
+        <small>By @LunaDev • Submitted 1 week ago</small>
+        <label>Status:</label>
+        <select class="status-select">
+          <option value="pending">Pending</option>
+          <option value="reviewed" selected>Reviewed</option>
+          <option value="fixed">Fixed</option>
+        </select>
+      </div>
+
+      <div class="feedback-card">
+        <h3>Dead Curse</h3>
+        <p>"Amazing atmosphere! Just fix the lag in level 5."</p>
+        <small>By @AceGamer • Submitted 4 days ago</small>
+        <label>Status:</label>
+        <select class="status-select">
+          <option value="pending">Pending</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="fixed" selected>Fixed</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="games.html" class="save-btn">🎮 Back to Games</a>
+    </div>
+  </section>
+
+  <script>
+    // Update status color dynamically
+    document.addEventListener("change", (e) => {
+      if (e.target.classList.contains("status-select")) {
+        const val = e.target.value;
+        if (val === "pending") e.target.style.color = "#ffcc00";
+        else if (val === "reviewed") e.target.style.color = "#3399ff";
+        else e.target.style.color = "#1aff87";
+      }
+    });
+  </script>
+</body>
+</html>

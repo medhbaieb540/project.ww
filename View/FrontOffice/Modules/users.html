@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GameBridge | My Profile</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ===== USER DASHBOARD PAGE ===== */
+    body {
+      background: #0c0c0c;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+      padding: 80px 10%;
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    /* ===== Profile Header ===== */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      border-radius: 16px;
+      padding: 30px 40px;
+      box-shadow: 0 0 20px #1aff8720;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 25px #1aff8722;
+    }
+
+    .profile-info h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .profile-info p {
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+
+    .role-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .xp-bar {
+      background: #111;
+      border: 1px solid #1aff8715;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 200px;
+      height: 10px;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .xp-fill {
+      background: var(--accent);
+      height: 100%;
+      width: 65%; /* dynamic */
+      transition: width 0.4s ease;
+    }
+
+    /* ===== Dashboard Sections ===== */
+    .dashboard-section {
+      margin-bottom: 60px;
+    }
+
+    .dashboard-section h2 {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      margin-bottom: 25px;
+    }
+
+    /* ===== Games Grid ===== */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid #1aff8722;
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .game-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px #1aff8733;
+      transform: translateY(-5px);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .game-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .game-card p {
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+
+    /* ===== Tournaments & Feedback ===== */
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .list-item {
+      background: var(--bg-card);
+      border: 1px solid #1aff8720;
+      padding: 15px 20px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    .list-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px #1aff8722;
+    }
+
+    .list-item span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .list-item p {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* ===== Achievements ===== */
+    .achievements {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      width: 90px;
+      height: 90px;
+      border-radius: 12px;
+      background: #111;
+      border: 1px solid #1aff8722;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .badge:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px #1aff8722;
+      transform: scale(1.05);
+    }
+
+    .badge i {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #1aff8711;
+      color: #888;
+      font-size: 0.85rem;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../images/logo.png" alt="Logo">
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="community.html">Community</a>
+      <a href="users.html" class="active">My Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="rewards.html">Rewards</a>
+    </nav>
+  </header>
+
+  <section>
+    <!-- ===== Profile Header ===== -->
+    <div class="profile-header">
+      <img src="../images/avatar.jpg" alt="User Avatar" class="avatar">
+      <div class="profile-info">
+        <h1>@UnityForgeDev</h1>
+        <p>Indie Game Developer | Joined March 2024</p>
+        <span class="role-badge">Developer</span>
+        <div class="xp-bar"><div class="xp-fill"></div></div>
+        <p style="font-size:0.8rem; color:#888;">Level 7 • XP: 650/1000</p>
+      </div>
+    </div>
+
+    <!-- ===== Uploaded Games ===== -->
+    <div class="dashboard-section">
+      <h2>🎮 Uploaded Games</h2>
+      <div class="games-grid">
+        <div class="game-card">
+          <img src="../images/game1.jpg" alt="Game Cover">
+          <h3>Monster Dream</h3>
+          <p>Downloads: 2.3K | Rating: 4.8⭐</p>
+        </div>
+        <div class="game-card">
+          <img src="../images/game2.jpg" alt="Game Cover">
+          <h3>Memories & Quest</h3>
+          <p>Downloads: 1.1K | Rating: 4.5⭐</p>
+        </div>
+        <div class="game-card">
+          <img src="../images/game3.jpg" alt="Game Cover">
+          <h3>Dead Curse</h3>
+          <p>Downloads: 3.9K | Rating: 4.9⭐</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Tournaments ===== -->
+    <div class="dashboard-section">
+      <h2>🏆 Tournaments Joined</h2>
+      <div class="list">
+        <div class="list-item"><p>Cyber Clash 2025</p><span>Top 10%</span></div>
+        <div class="list-item"><p>Neon Rush Cup</p><span>Champion</span></div>
+        <div class="list-item"><p>Retro Revival Jam</p><span>Participant</span></div>
+      </div>
+    </div>
+
+    <!-- ===== Feedback ===== -->
+    <div class="dashboard-section">
+      <h2>🐞 Recent Feedback</h2>
+      <div class="list">
+        <div class="list-item"><p>Reported bug in “Monster Dream” – collision issue.</p><span>Fixed</span></div>
+        <div class="list-item"><p>Suggested new feature: cloud save sync.</p><span>Under Review</span></div>
+      </div>
+    </div>
+
+    <!-- ===== Achievements ===== -->
+    <div class="dashboard-section">
+      <h2>⭐ Achievements</h2>
+      <div class="achievements">
+        <div class="badge"><i>🏅</i>Top Dev</div>
+        <div class="badge"><i>🔥</i>Active User</div>
+        <div class="badge"><i>💬</i>Community Hero</div>
+        <div class="badge"><i>🎯</i>Precision Coder</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 GameBridge • Developed by Team UnityForge</footer>
+</body>
+</html>
