@@ -114,7 +114,7 @@ public function getUserByEmail(string $email)
         }
     }
 
-   public function addUser(User $User)
+   public function addUser(User $User) : int 
 {
     $sql = "INSERT INTO `login` 
             (username, email, password, user_role, birth_date, address, gender)
@@ -138,6 +138,9 @@ public function getUserByEmail(string $email)
         $info = $query->errorInfo();
         throw new Exception($info[2]);
     }
+
+
+      return (int)$db->lastInsertId();
 }
 
 

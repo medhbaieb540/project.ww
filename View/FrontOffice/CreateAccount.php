@@ -48,14 +48,25 @@ if (
             $_POST['gender']
         );
 
-        try {
-            $userC->addUser($user);
-            header("Location: ../FrontOffice/login.php");
-            exit; 
-        } catch (Exception $e) {
-            echo "Controller error: " . $e->getMessage();
-            exit;
+       try {
+        $newUserId = $userC->addUser($user);
+
+    // لو أكاونت نوعه developer -> نوديه يعمل شركة
+         if ($_POST['accountType'] === 'developer') {
+        $email = urlencode($_POST['email']);
+        header("Location: createOrSearchCompany.php");
+        exit;
         }
+
+    // غير هيك (player مثلاً) نرجعه ع صفحة اللوجين
+    header("Location: ../FrontOffice/login.php");
+    exit;
+
+} catch (Exception $e) {
+    echo "Controller error: " . $e->getMessage();
+    exit;
+}
+
 
     } else {
         $error = "Missing information";
