@@ -2,6 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+require_once __DIR__ . '/../../model/GameModel.php';
 $baseUrl = BASE_URL;
 ?>
 <!DOCTYPE html>
@@ -249,6 +250,18 @@ $baseUrl = BASE_URL;
             <div class="nav-links">
                 <a href="<?= $baseUrl ?>/index.php?controller=game&action=index">View Games</a>
                 <a href="<?= $baseUrl ?>/index.php?controller=game&action=create">Add Game</a>
+                <?php
+                $gameModel = new GameModel();
+                $trashCount = $gameModel->getDeletedGamesCount();
+                ?>
+                <a href="<?= $baseUrl ?>/index.php?controller=game&action=trash" style="position: relative;">
+                    🗑️ Trash
+                    <?php if ($trashCount > 0): ?>
+                        <span style="position: absolute; top: -8px; right: -8px; background: #ff3366; color: #fff; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">
+                            <?php echo $trashCount; ?>
+                        </span>
+                    <?php endif; ?>
+                </a>
                 <a href="<?= $baseUrl ?>/assets/index.html">Home</a>
             </div>
         </div>
@@ -271,6 +284,20 @@ $baseUrl = BASE_URL;
                 <h3>★ <?php echo number_format($stats['avg_rating'] ?? 0, 1); ?></h3>
                 <p>Average Rating</p>
             </div>
+            <?php
+            $gameModel = new GameModel();
+            $trashCount = $gameModel->getDeletedGamesCount();
+            if ($trashCount > 0):
+            ?>
+            <div class="stat-card" style="border-color: #ff3366;">
+                <h3 style="color: #ff3366;"><?php echo $trashCount; ?></h3>
+                <p>Deleted Games</p>
+                <a href="<?= $baseUrl ?>/index.php?controller=game&action=trash" 
+                   style="display: inline-block; margin-top: 10px; padding: 6px 15px; background: #ff3366; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: 600;">
+                   View Trash
+                </a>
+            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Games Management Section -->

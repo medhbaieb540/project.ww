@@ -10,7 +10,7 @@ class GameModel {
     }
 
     /**
-     * Get all games with category and developer info
+     * Get all games with category and developer info (excluding deleted)
      */
     public function getAllGames() {
         if (!$this->conn) {
@@ -22,6 +22,7 @@ class GameModel {
                       FROM " . $this->table . " g
                       LEFT JOIN categories c ON g.category_id = c.category_id
                       LEFT JOIN users u ON g.developer_id = u.user_id
+                      WHERE (g.deleted_at IS NULL OR g.deleted_at = '')
                       ORDER BY g.created_at DESC";
             
             $stmt = $this->conn->prepare($query);
@@ -34,15 +35,20 @@ class GameModel {
     }
 
     /**
-     * Get a single game by ID
+     * Get a single game by ID (including deleted)
      */
-    public function getGameById($id) {
+    public function getGameById($id, $includeDeleted = false) {
         $query = "SELECT g.*, c.name as category_name, u.username as developer_name 
                   FROM " . $this->table . " g
                   LEFT JOIN categories c ON g.category_id = c.category_id
                   LEFT JOIN users u ON g.developer_id = u.user_id
-                  WHERE g.game_id = :id
-                  LIMIT 1";
+                  WHERE g.game_id = :id";
+        
+        if (!$includeDeleted) {
+            $query .= " AND (g.deleted_at IS NULL OR g.deleted_at = '')";
+        }
+        
+        $query .= " LIMIT 1";
         
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $id);
@@ -100,15 +106,87 @@ class GameModel {
     }
 
     /**
-     * Delete a game
+     * Soft delete a game (move to trash)
      */
     public function deleteGame($id) {
+        $query = "UPDATE " . $this->table . " 
+                  SET deleted_at = NOW() 
+                  WHERE game_id = :id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        
+        return $stmt->execute();
+    }
+
+    /**
+     * Get all deleted games (trash)
+     */
+    public function getDeletedGames() {
+        if (!$this->conn) {
+            return [];
+        }
+        
+        try {
+            $query = "SELECT g.*, c.name as category_name, u.username as developer_name 
+                      FROM " . $this->table . " g
+                      LEFT JOIN categories c ON g.category_id = c.category_id
+                      LEFT JOIN users u ON g.developer_id = u.user_id
+                      WHERE g.deleted_at IS NOT NULL AND g.deleted_at != ''
+                      ORDER BY g.deleted_at DESC";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Restore a deleted game
+     */
+    public function restoreGame($id) {
+        $query = "UPDATE " . $this->table . " 
+                  SET deleted_at = NULL 
+                  WHERE game_id = :id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        
+        return $stmt->execute();
+    }
+
+    /**
+     * Permanently delete a game from trash
+     */
+    public function permanentlyDeleteGame($id) {
         $query = "DELETE FROM " . $this->table . " WHERE game_id = :id";
         
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $id);
         
         return $stmt->execute();
+    }
+
+    /**
+     * Get count of deleted games
+     */
+    public function getDeletedGamesCount() {
+        try {
+            $query = "SELECT COUNT(*) as count 
+                      FROM " . $this->table . " 
+                      WHERE deleted_at IS NOT NULL AND deleted_at != ''";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['count'] ?? 0;
+        } catch (Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -120,6 +198,7 @@ class GameModel {
                   LEFT JOIN categories c ON g.category_id = c.category_id
                   LEFT JOIN users u ON g.developer_id = u.user_id
                   WHERE g.category_id = :category_id
+                  AND (g.deleted_at IS NULL OR g.deleted_at = '')
                   ORDER BY g.created_at DESC";
         
         $stmt = $this->conn->prepare($query);
@@ -141,7 +220,8 @@ class GameModel {
                   FROM " . $this->table . " g
                   LEFT JOIN categories c ON g.category_id = c.category_id
                   LEFT JOIN users u ON g.developer_id = u.user_id
-                  WHERE g.title LIKE :search OR g.description LIKE :search
+                  WHERE (g.title LIKE :search OR g.description LIKE :search)
+                  AND (g.deleted_at IS NULL OR g.deleted_at = '')
                   ORDER BY g.created_at DESC";
         
         $stmt = $this->conn->prepare($query);
@@ -160,7 +240,7 @@ class GameModel {
                   FROM " . $this->table . " g
                   LEFT JOIN categories c ON g.category_id = c.category_id
                   LEFT JOIN users u ON g.developer_id = u.user_id
-                  WHERE 1=1";
+                  WHERE (g.deleted_at IS NULL OR g.deleted_at = '')";
         
         $params = [];
         
@@ -199,6 +279,7 @@ class GameModel {
                   FROM " . $this->table . " g
                   LEFT JOIN categories c ON g.category_id = c.category_id
                   LEFT JOIN users u ON g.developer_id = u.user_id
+                  WHERE (g.deleted_at IS NULL OR g.deleted_at = '')
                   ORDER BY ";
         
         if ($sortBy === 'category_name') {
@@ -222,7 +303,8 @@ class GameModel {
                     AVG(average_rating) as avg_rating,
                     COUNT(DISTINCT category_id) as total_categories,
                     COUNT(DISTINCT developer_id) as total_developers
-                  FROM " . $this->table;
+                  FROM " . $this->table . "
+                  WHERE (deleted_at IS NULL OR deleted_at = '')";
         
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

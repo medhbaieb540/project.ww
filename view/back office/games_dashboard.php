@@ -397,9 +397,20 @@ $baseUrl = BASE_URL;
   <!-- ===== Sidebar ===== -->
   <div class="sidebar">
     <h2>Admin</h2>
-    <a href="#" onclick="return false;">Dashboard</a>
+    <a href="<?= $baseUrl ?>/index.php?controller=game&action=dashboard">Dashboard</a>
     <a href="#" onclick="return false;">Users</a>
     <a href="<?= $baseUrl ?>/index.php?controller=game&action=gamesDashboard" class="active">Games</a>
+    <?php
+    $trashCount = $gameModel->getDeletedGamesCount();
+    ?>
+    <a href="<?= $baseUrl ?>/index.php?controller=game&action=trash" style="position: relative;">
+      🗑️ Trash
+      <?php if ($trashCount > 0): ?>
+        <span style="position: absolute; top: -5px; right: -5px; background: #ff3366; color: #fff; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;">
+          <?php echo $trashCount; ?>
+        </span>
+      <?php endif; ?>
+    </a>
     <a href="#" onclick="return false;">Tournaments</a>
     <a href="#" onclick="return false;">Feedback</a>
     <a href="#" onclick="return false;">Rewards</a>

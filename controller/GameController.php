@@ -269,7 +269,7 @@ class GameController {
     }
 
     /**
-     * Delete a game
+     * Delete a game (soft delete - move to trash)
      */
     public function delete() {
         $id = $_GET['id'] ?? null;
@@ -279,7 +279,64 @@ class GameController {
             exit;
         }
 
-        $game = $this->gameModel->getGameById($id);
+        $result = $this->gameModel->deleteGame($id);
+        
+        if ($result) {
+            $_SESSION['success'] = 'Game moved to trash successfully';
+            header('Location: index.php?controller=game&action=index');
+            exit;
+        } else {
+            $_SESSION['error'] = 'Failed to delete game';
+            header('Location: index.php?controller=game&action=index');
+            exit;
+        }
+    }
+
+    /**
+     * Show trash page with deleted games
+     */
+    public function trash() {
+        $deletedGames = $this->gameModel->getDeletedGames();
+        $deletedCount = $this->gameModel->getDeletedGamesCount();
+        require_once __DIR__ . '/../view/back office/trash.php';
+    }
+
+    /**
+     * Restore a game from trash
+     */
+    public function restore() {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            $_SESSION['error'] = 'Invalid game ID';
+            header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
+            exit;
+        }
+
+        $result = $this->gameModel->restoreGame($id);
+        
+        if ($result) {
+            $_SESSION['success'] = 'Game restored successfully';
+            header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
+            exit;
+        } else {
+            $_SESSION['error'] = 'Failed to restore game';
+            header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
+            exit;
+        }
+    }
+
+    /**
+     * Permanently delete a game from trash
+     */
+    public function permanentDelete() {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            $_SESSION['error'] = 'Invalid game ID';
+            header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
+            exit;
+        }
+
+        $game = $this->gameModel->getGameById($id, true);
         if ($game) {
             if (!empty($game['image_path']) && file_exists(__DIR__ . '/../' . $game['image_path'])) {
                 unlink(__DIR__ . '/../' . $game['image_path']);
@@ -289,17 +346,47 @@ class GameController {
             }
         }
 
-        $result = $this->gameModel->deleteGame($id);
+        $result = $this->gameModel->permanentlyDeleteGame($id);
         
         if ($result) {
-            $_SESSION['success'] = 'Game deleted successfully';
-            header('Location: index.php?controller=game&action=index');
+            $_SESSION['success'] = 'Game permanently deleted';
+            header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
             exit;
         } else {
-            $_SESSION['error'] = 'Failed to delete game';
-            header('Location: index.php?controller=game&action=index');
+            $_SESSION['error'] = 'Failed to permanently delete game';
+            header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
             exit;
         }
+    }
+
+    /**
+     * Empty trash - permanently delete all deleted games
+     */
+    public function emptyTrash() {
+        $deletedGames = $this->gameModel->getDeletedGames();
+        $deletedCount = 0;
+        
+        foreach ($deletedGames as $game) {
+            if (!empty($game['image_path']) && file_exists(__DIR__ . '/../' . $game['image_path'])) {
+                unlink(__DIR__ . '/../' . $game['image_path']);
+            }
+            if (!empty($game['file_path']) && file_exists(__DIR__ . '/../' . $game['file_path'])) {
+                unlink(__DIR__ . '/../' . $game['file_path']);
+            }
+            
+            if ($this->gameModel->permanentlyDeleteGame($game['game_id'])) {
+                $deletedCount++;
+            }
+        }
+        
+        if ($deletedCount > 0) {
+            $_SESSION['success'] = "Permanently deleted {$deletedCount} game(s) from trash";
+        } else {
+            $_SESSION['error'] = 'No games to delete or failed to delete';
+        }
+        
+        header('Location: ' . BASE_URL . '/index.php?controller=game&action=trash');
+        exit;
     }
 
     /**
@@ -349,6 +436,39 @@ class GameController {
         $games = $this->gameModel->getAllGames();
         $categories = $this->categoryModel->getAllCategories();
         require_once __DIR__ . '/../view/front office/game/statistics.php';
+    }
+
+    /**
+     * Export games to CSV
+     */
+    public function export() {
+        $games = $this->gameModel->getAllGames();
+        
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="games_export_' . date('Y-m-d') . '.csv"');
+        
+        $output = fopen('php://output', 'w');
+        
+        // CSV headers
+        fputcsv($output, ['ID', 'Title', 'Description', 'Category', 'Developer', 'Rating', 'Created Date', 'Image Path', 'File Path']);
+        
+        // CSV data
+        foreach ($games as $game) {
+            fputcsv($output, [
+                $game['game_id'],
+                $game['title'],
+                $game['description'],
+                $game['category_name'] ?? 'Uncategorized',
+                $game['developer_name'] ?? 'Unknown',
+                $game['average_rating'] ?? 0,
+                $game['created_at'],
+                $game['image_path'] ?? '',
+                $game['file_path'] ?? ''
+            ]);
+        }
+        
+        fclose($output);
+        exit;
     }
 
     /**
