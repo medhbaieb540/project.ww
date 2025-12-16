@@ -1,0 +1,228 @@
+/* ===== USER DASHBOARD PAGE ===== */
+body {
+  background: #0c0c0c;
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+section {
+  padding: 80px 10%;
+  min-height: 100vh;
+}
+
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+/* ===== Profile Header ===== */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: var(--bg-card);
+  border: 1px solid #1aff8720;
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 0 20px #1aff8720;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 25px #1aff8722;
+}
+
+.profile-info h1 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.profile-info p {
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.role-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.xp-bar {
+  background: #111;
+  border: 1px solid #1aff8715;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  height: 10px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.xp-fill {
+  background: var(--accent);
+  height: 100%;
+  width: 65%; /* dynamic */
+  transition: width 0.4s ease;
+}
+
+/* ===== Dashboard Sections ===== */
+.dashboard-section {
+  margin-bottom: 60px;
+}
+
+.dashboard-section h2 {
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+/* ===== Games Grid ===== */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.game-card {
+  background: var(--bg-card);
+  border: 1px solid #1aff8722;
+  border-radius: 12px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.game-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px #1aff8733;
+  transform: translateY(-5px);
+}
+
+.game-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.game-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.game-card p {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* ===== Tournaments & Feedback ===== */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.list-item {
+  background: var(--bg-card);
+  border: 1px solid #1aff8720;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.list-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px #1aff8722;
+}
+
+.list-item span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.list-item p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* ===== Achievements ===== */
+.achievements {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  background: #111;
+  border: 1px solid #1aff8722;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.badge:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px #1aff8722;
+  transform: scale(1.05);
+}
+
+.badge i {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.logout-btn {
+  background:#ff4d4d;
+  color:#000;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.logout-btn:hover {
+  opacity:.9;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #1aff8711;
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 80px;
+}

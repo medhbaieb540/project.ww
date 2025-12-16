@@ -1,0 +1,53 @@
+/* ===== بنفس تصميمك ===== */
+body {
+  background: #0c0c0c;
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+}
+
+section { padding: 40px 10%; }
+
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.game-card {
+  background: var(--bg-card);
+  border: 1px solid #1aff8722;
+  border-radius: 12px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.game-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px #1aff8733;
+  transform: translateY(-5px);
+}
+
+.card-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.update-btn {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.delete-btn {
+  border: 2px solid #ff4d4d;
+  color: #ff4d4d;
+  background: transparent;
+}
