@@ -1,0 +1,731 @@
+/* ===========================
+   Create Account – GameBridge
+   File: create_account.css
+=========================== */
+
+:root {
+  --bg: #0a0a0a;
+  --bg-soft: #111;
+  --accent: #00ff88;
+  --accent-soft: rgba(0, 255, 136, 0.15);
+  --accent2: #00cc66;
+  --text: #f5f5f5;
+  --muted: #9ca3af;
+  --error: #ff4d6a;
+  --radius: 18px;
+  --transition: 0.25s ease;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Body / Background ===== */
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #02150c 0%, #032012 30%, #010604 100%);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.bg-orbit {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(0, 255, 136, 0.15), transparent 70%),
+    radial-gradient(circle at 80% 80%, rgba(0, 150, 80, 0.12), transparent 70%);
+  filter: blur(60px);
+  opacity: 0.9;
+  animation: pulseGlow 8s infinite ease-in-out;
+}
+
+/* ===== Card Container ===== */
+.container {
+  width: 100%;
+  max-width: 780px;              /* wider for 2 columns */
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.0)
+  );
+  border-radius: var(--radius);
+  padding: 32px 32px 26px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(148, 163, 253, 0.18);
+  backdrop-filter: blur(30px);
+}
+
+/* ===== Logo / Header ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: rgba(0, 255, 136, 0.06);
+  padding: 5px;
+  box-shadow:
+    0 0 8px rgba(0, 255, 136, 0.25),
+    inset 0 0 6px rgba(0, 255, 136, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.logo-text {
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+/* ===== Form Layout ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Two-column grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px; /* row / column */
+  margin-bottom: 10px;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.field-label {
+  font-size: 12px;
+  margin-bottom: 1px;
+  color: var(--muted);
+}
+
+/* ===== Inputs & Selects ===== */
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input,
+.input-wrap select {
+  width: 100%;
+  padding: 9px 32px 9px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 253, 0.25);
+  background: rgba(5, 10, 25, 0.96);
+  color: var(--text);
+  font-size: 12px;
+  outline: none;
+  transition: all var(--transition);
+}
+
+.input-wrap input::placeholder {
+  color: #6b7280;
+}
+
+/* Focus state */
+.input-wrap input:focus,
+.input-wrap select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.23);
+  background: #020817;
+}
+
+/* Select styling */
+.input-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.input-wrap select:invalid {
+  color: #6b7280;
+}
+
+.input-wrap select option {
+  color: var(--text);
+}
+
+.input-wrap select:hover {
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.15);
+}
+
+/* Icon inside input */
+.input-icon {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* ===== Terms, Button, Footer ===== */
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.remember input {
+  width: 11px;
+  height: 11px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.remember a {
+  color: var(--accent);
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.remember a:hover {
+  color: var(--accent2);
+}
+
+.btn-primary {
+  margin-top: 4px;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  color: #020817;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+  transition: all var(--transition);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(0, 255, 136, 0.4);
+  filter: saturate(1.2);
+}
+
+.signup-text {
+  font-size: 10px;
+  text-align: center;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.signup-text a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-text a:hover {
+  color: var(--accent2);
+}
+
+/* ===== Status Messages ===== */
+.status {
+  margin-top: 2px;
+  font-size: 9px;
+  min-height: 10px;
+}
+
+.status.error {
+  color: var(--error);
+}
+
+.status.success {
+  color: #4ade80;
+}
+
+/* ===== Animations & Responsive ===== */
+@keyframes pulseGlow {
+  0% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+/* Mobile: stack columns */
+@media (max-width: 680px) {
+  .container {
+    max-width: 100%;
+    padding: 22px 18px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* TWO COLUMN LAYOUT */
+.form-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 25px;
+  width: 100%;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* FORM GROUP */
+.form-group {
+  width: 100%;
+}
+
+/* Adjust inputs in 2-column layout */
+.input-wrap input,
+.input-wrap select {
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148,163,253,0.25);
+  background: rgba(5,10,25,0.95);
+  color: var(--text);
+  font-size: 12px;
+}
+
+/* Mobile = stack vertically */
+@media (max-width: 720px) {
+  .form-two-columns {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+
+
+/* ===============================
+   Company Search Page - Full CSS
+   Works with: .container + .company-container
+================================ */
+
+/* ===== CONTAINER & LAYOUT ===== */
+.company-container{
+  max-width: 520px;
+  width: 92%;            
+  margin: 40px auto;
+  padding: 34px 38px 28px;
+}
+
+/* ===== HEADER SECTION ===== */
+.search-header{
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.search-header h1{
+  margin: 16px 0 8px;
+  color: #fff;
+  font-size: 2rem;
+  letter-spacing: 0.2px;
+}
+
+.search-header .subtitle{
+  color: #a7a7a7;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ===== FORM ===== */
+.search-section{
+  margin-bottom: 18px;
+}
+
+.search-section form{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group{
+  margin-top: 10px;
+}
+
+.field-label{
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.input-wrap{
+  position: relative;
+  width: 100%;
+}
+
+.input-wrap input{
+  width: 100%;
+  padding-right: 42px;
+}
+
+.input-icon{
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* Submit button spacing */
+.btn-primary{
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ===== OR DIVIDER ===== */
+.or-divider{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0;
+  font-size: 0.9rem;
+}
+
+.or-divider span{
+  flex: 1;
+  height: 1px;
+  background: rgba(26,255,135,0.20);
+}
+
+.or-divider p{
+  margin: 0;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ===== ALT ACTION (Create Company) ===== */
+.alt-action{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.alt-action p{
+  color: rgba(255,255,255,0.62);
+  font-size: 0.92rem;
+  margin: 0 0 10px;
+  font-weight: 500;
+}
+
+.btn-outline{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #1aff87;
+  color: #1aff87;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: 0.25s;
+}
+
+.btn-outline:hover{
+  background: #1aff87;
+  color: #000;
+  box-shadow: 0 0 18px rgba(26,255,135,0.25);
+}
+
+/* ===== RESULTS SECTION ===== */
+.results-section{
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(26,255,135,0.15);
+}
+
+/* ===== STATUS MESSAGES ===== */
+.status{
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+}
+
+.status.error{
+  color: #ff6b6b;
+  border-color: rgba(255,107,107,0.25);
+  background: rgba(255, 0, 0, 0.08);
+}
+
+.status.success{
+  color: #1aff87;
+  border-color: rgba(26,255,135,0.25);
+  background: rgba(26,255,135,0.08);
+}
+
+/* If empty -> no space */
+.status:empty{
+  display: none;
+}
+
+/* ===== RESULTS TABLE ===== */
+.table-wrap{
+  overflow-x: auto;
+}
+
+.results-table{
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(0,0,0,0.22);
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 520px;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.results-table thead{
+  background: rgba(0,0,0,0.35);
+}
+
+.results-table th{
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.92rem;
+}
+
+.results-table td{
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.90);
+  font-size: 0.95rem;
+}
+
+.results-table tbody tr{
+  transition: 0.2s;
+}
+
+.results-table tbody tr:hover{
+  background: rgba(255,255,255,0.03);
+}
+
+/* Columns */
+.col-name{ width: 52%; }
+.col-status{ width: 23%; }
+.col-action{ width: 25%; text-align: center; }
+
+.company-name{
+  font-weight: 600;
+  color: #fff;
+}
+
+.company-status{
+  color: rgba(255,255,255,0.75);
+  text-transform: capitalize;
+  font-size: 0.92rem;
+}
+
+.company-action{
+  text-align: center;
+}
+
+/* Join button as link */
+.join-link{
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-small{
+  display: inline-block;
+  width: auto;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px){
+  .company-container{
+    width: 94%;
+    padding: 26px 22px 22px;
+    margin: 30px auto;
+  }
+
+  .search-header h1{
+    font-size: 1.55rem;
+  }
+
+  .results-table th,
+  .results-table td{
+    padding: 12px 10px;
+  }
+}
+
+@media (max-width: 600px){
+  .company-container{
+    width: 95%;
+    padding: 18px 16px 16px;
+    margin: 24px auto;
+  }
+
+  .search-header h1{
+    font-size: 1.35rem;
+    margin: 12px 0 6px;
+  }
+
+  .search-header .subtitle{
+    font-size: 0.87rem;
+  }
+
+  .btn-outline{
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+
+  .btn-small{
+    padding: 8px 12px;
+    font-size: 0.86rem;
+  }
+}
+
+/* ===== Layout: results LEFT of search, search stays centered ===== */
+.page-wrap{
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 32px;
+  align-items: start;
+  justify-content: center;
+
+  /* default: only search in center */
+  grid-template-columns: 520px;
+}
+
+/* search fixed width */
+.search-card{
+  width: 100%;
+  max-width: 520px;
+}
+
+/* results styling */
+.results-card{
+  width: 570px;
+  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 22px;
+  backdrop-filter: blur(20px);
+}
+
+/* when results exist: make 2 columns (results + search) */
+.page-wrap:has(.results-card){
+  grid-template-columns: 520px 520px; /* left results + middle search */
+}
+
+/* ensure search DOES NOT move: we center both columns together */
+.page-wrap:has(.results-card){
+  justify-content: center;
+}
+
+/* table */
+.results-title{
+  margin: 0 0 14px 0;
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.table-wrap{
+  overflow-x: hidden !important; /* بدل auto */
+}
+
+.results-table{
+  width: 50%;
+  border-collapse: collapse;
+  background: #0f0f0f;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.results-table th{
+  padding: 14px 12px;
+  text-align: left;
+  background: #111;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.results-table td{
+  padding: 17px 12px;
+  border-top: 1px solid rgba(26,255,135,0.10);
+}
+
+.results-table th:last-child,
+.results-table td:last-child{
+  text-align: right;
+}
+
+.btn-small{
+  display: inline-flex;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* responsive */
+@media (max-width: 1100px){
+  .page-wrap:has(.results-card){
+    grid-template-columns: 1fr; /* stack */
+  }
+  .results-card, .search-card{
+    width: 100%;
+    max-width: 600px;
+  }
+}
+

@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap');
+
+/* ===== Global ===== */
+:root {
+  --accent: #1AFF87;
+  --bg-dark: #0c0c0c;
+  --bg-card: #161616;
+  --text: #f1f1f1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== Header & Nav ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #000;
+  border-bottom: 1px solid var(--accent);
+}
+
+.logo-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--accent);
+}
+
+
+
+/* ===== Tournaments Section ===== */
+.tournaments-section {
+  padding: 80px 10%;
+  min-height: calc(100vh - 80px);
+  background: radial-gradient(circle at top, #1aff8720 0, #0c0c0c 45%, #000 100%);
+}
+
+.tournaments-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+/* ===== Dev Controls ===== */
+.dev-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+#openAddModal {
+  background: transparent;
+  border: 1px dashed var(--accent);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#openAddModal:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+
+
+/* ===== Tournament Grid ===== */
+.tournament-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.tournament-card {
+  background: var(--bg-card);
+  border: 1px solid #1aff8720;
+  border-radius: 12px;
+  padding: 20px 20px 22px;
+  box-shadow: 0 0 15px #00000055;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* for badges */
+}
+
+/* ===== Images ===== */
+.tournament-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 12px #00000060;
+  transition: transform 0.4s ease;
+}
+
+.tournament-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 25px #1aff8733;
+  transform: translateY(-6px);
+}
+
+.tournament-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ===== Titles & Text ===== */
+.tournament-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.tournament-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.players {
+  font-weight: 500;
+}
+
+/* Countdown text on card */
+.countdown {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.logout-btn{
+  background:#ff4d4d;
+  color:#000;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:700;
+}
+.logout-btn:hover{
+  opacity:.9;
+}
+
+/* ===== Check Button on Card ===== */
+.check-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 6px 18px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.check-btn:hover {
+  background: var(--accent);
+  color: #000;
+  transform: translateY(-1px);
+}
+
+/* ===== Badges ===== */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+  z-index: 5;
+}
+
+.badge-live {
+  background: #ff3b4a;
+  animation: pulse 1.2s infinite;
+}
+
+.badge-upcoming {
+  background: #3b82ff;
+}
+
+.badge-finished {
+  background: #6b7280;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0px #ff3b4a; }
+  50%  { box-shadow: 0 0 12px #ff3b4a; }
+  100% { box-shadow: 0 0 0px #ff3b4a; }
+}
+
+/* ===== Modal Base (used for details & add) ===== */
+.details-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;              /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.details-content {
+  background: #111;
+  border: 1px solid #1aff8720;
+  border-radius: 12px;
+  padding: 25px 30px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 0 25px #000;
+  text-align: left;
+}
+
+.details-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.details-content p {
+  color: #ddd;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.details-close {
+  float: right;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #aaa;
+  transition: 0.3s;
+}
+
+.details-close:hover {
+  color: var(--accent);
+}
+
+/* Popup image */
+#detailsImage {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+/* Popup countdown */
+#detailsCountdown {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+/* Buttons inside popup */
+#detailsActions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#detailsActions button {
+  background: transparent;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+/* Join button style */
+#joinBtnPopup {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+#joinBtnPopup:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+/* Leave button style */
+#leaveBtnPopup {
+  border: 2px solid #f97316;
+  color: #f97316;
+}
+
+#leaveBtnPopup:hover {
+  background: #f97316;
+  color: #000;
+}
+
+/* Spectate button style */
+#spectateBtnPopup {
+  border: 2px solid #3b82ff;
+  color: #3b82ff;
+}
+
+#spectateBtnPopup:hover {
+  background: #3b82ff;
+  color: #000;
+}
+
+/* ===== Add Tournament (Dev) Modal Form ===== */
+.add-form h3 {
+  margin-bottom: 10px;
+}
+
+.add-form label {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.add-form input,
+.add-form select {
+  width: 100%;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #0c0c0c;
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+#saveTournament {
+  margin-top: 12px;
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+#saveTournament:hover {
+  background: #11cc66;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tournaments-section {
+    padding: 50px 5%;
+  }
+}
+.tournaments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tournaments-table th,
+.tournaments-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.tournaments-table thead {
+  background: #111;
+}
+
+.tournaments-table tbody tr:nth-child(even) {
+  background: #0f0f0f;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-upcoming {
+  background: #1a1f3b;
+  color: #4ea1ff;
+}
+
+.badge-live {
+  background: #26110f;
+  color: #ff4d4d;
+}
+
+.badge-finished {
+  background: #122013;
+  color: #7af58b;
+}
+
+.tournaments-action-btn {
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  border: none;
+  cursor: default;
+}
+
+.btn-join {
+  background: #1aff87;
+  color: #000;
+}
+
+.btn-spectate {
+  background: #4ea1ff;
+  color: #000;
+}
+
+.btn-closed {
+  background: #555;
+  color: #ddd;
+}
+.tournament-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+
+.tournament-filters input[type="text"],
+.tournament-filters select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #333a;
+  background: #05070c;
+  color: #eee;
+  font-size: 0.85rem;
+}
+
+
