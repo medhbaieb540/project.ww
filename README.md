@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/24246311/README.md)
 # 🎮 GAMEBRIDGE – Connected & Intelligent Gaming Platform
 
 **Connecting indie developers with players through community-driven engagement**
@@ -82,6 +81,7 @@ GameBridge is a comprehensive gaming platform designed to bridge the gap between
 
 ### **Project Structure**
 
+```
 gamebridge/
 ├── Controller/ # Application Controllers
 │ ├── GameController.php
@@ -161,6 +161,7 @@ gamebridge/
 ├── composer.json # PHP dependencies
 ├── .htaccess # URL rewriting
 └── README.md # This file
+```
 
 ## 🚀 Installation
 
