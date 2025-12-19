@@ -133,6 +133,7 @@ $deletedCount = $deletedCount ?? 0;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GameBridge | Games</title>
+    <link rel="stylesheet" href="../../public/css/frontoffice-header.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap');
         
@@ -790,15 +791,14 @@ $deletedCount = $deletedCount ?? 0;
          <div class="logo-container">
       <img src="../../public/images/logo.png" alt="Logo" class="logo">
     </div>
-       
         <nav>
-      <a href="../index.html">Home</a>
-      <a href="list.php"class="active">Games</a>
+      <a href="index.php">Home</a>
       <a href="tournaments.php">Tournaments</a>
       <a href="community.php">Community</a>
+      <a href="list.php" class="active">Games</a>
       <a href="event.php">Events</a>
       <a href="feedback.php">Feedback</a>
-      <a href="profile.php" >My Profile</a>
+      <a href="profile.php">My Profile</a>
       <a href="logout.php"
          onclick="return confirm('Are you sure you want to logout?');"
          class="logout-btn">Logout</a>
@@ -889,7 +889,7 @@ $deletedCount = $deletedCount ?? 0;
             <span>📊 Total Games: <strong><?php echo count($games); ?></strong></span>
             <span id="filteredCount">Showing: <strong><?php echo count($games); ?></strong> games</span>
             <div style="display: flex; gap: 10px; align-items: center;">
-            <button class="trash-toggle" onclick="toggleTrash()">🗑️ Trash</button>
+            <!-- <button class="trash-toggle" onclick="toggleTrash()">🗑️ Trash</button> -->
                 <button class="favorites-toggle" onclick="toggleFavoritesPanel()" id="favoriteToggleBtn">♡ Favorites (<span id="favoriteCountBadge">0</span>)</button>
             </div>
         </div>
@@ -967,7 +967,7 @@ $deletedCount = $deletedCount ?? 0;
                         </p>
                         <div class="game-actions">
                                 <?php if (!empty($game['file_path'])): ?>
-                                    <a href="../../<?php echo htmlspecialchars($game['file_path']); ?>" class="btn-play" download>PLAY</a>
+                                    <a href="../../<?php echo htmlspecialchars($game['file_path']); ?>" class="btn-play" onclick="recordPlay(<?php echo $game['game_id']; ?>); return true;" download>PLAY</a>
                                 <?php else: ?>
                                     <a href="#" class="btn-play" onclick="alert('Game file not available'); return false;">PLAY</a>
                                 <?php endif; ?>
@@ -1310,6 +1310,24 @@ $deletedCount = $deletedCount ?? 0;
             updateFavoriteButtons();
             renderFavorites();
         });
+
+        // Record play action
+        function recordPlay(gameId) {
+            const formData = new FormData();
+            formData.append('game_id', gameId);
+            
+            fetch('../../Controller/record_play_action.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Game recorded to profile');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
     </script>
 </body>
 </html>

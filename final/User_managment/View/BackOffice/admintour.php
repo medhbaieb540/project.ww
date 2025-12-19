@@ -198,6 +198,7 @@ try {
   <title>GameBridge | Admin Tournaments</title>
   <link rel="stylesheet" href="../../public/css/tournaments.css">
   <link rel="stylesheet" href="../../public/css/admin-tournaments.css">
+  
 </head>
 <body>
 

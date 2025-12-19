@@ -117,10 +117,10 @@ class Feedback
         return $row !== false ? $row : null;
     }
 
-    public function createFeedback(PDO $db): int
+    public function createFeedback(PDO $db, ?int $user_id = null): int
     {
-        $sql = "INSERT INTO feedback (game, type, message, author, status)
-                VALUES (:game, :type, :message, :author, :status)";
+        $sql = "INSERT INTO feedback (game, type, message, author, status, user_id)
+                VALUES (:game, :type, :message, :author, :status, :user_id)";
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
@@ -129,6 +129,7 @@ class Feedback
             ':message'=> $this->message,
             ':author' => $this->author,
             ':status' => $this->status,
+            ':user_id'=> $user_id,
         ]);
 
         return (int) $db->lastInsertId();

@@ -31,8 +31,7 @@ foreach ($list as $event) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GameBridge | Events</title>
-
+  <title>GameBridge | Events</title>  <link rel="stylesheet" href="../../public/css/frontoffice-header.css">
   <!-- ✅ FIXED PATH: you are inside View/FrontOffice -->
   <link rel="stylesheet" href="../../public/css/stylefrontevent2.css" />
 
@@ -162,22 +161,21 @@ foreach ($list as $event) {
   <!-- ===== Header ===== -->
 <header>
     <div class="logo-container">
-      <img src="../../public/images/logo.jpg" alt="Logo">
+      <img src="../../public/images/logo.png" alt="Logo">
     </div>
- <nav>
-    <a href="index.php">Home</a>
-    <a href="games.php">Games</a>
-    <a href="tournaments.php" >Tournaments</a>
-    <a href="community.php">Community</a>
-    <a href="event.php" class="active">Events</a>
-    <!-- ✅ Go to your partner's profile page -->
-    <a href="feedback.php">Feedback</a>
-    <a href="profile.php">My Profile</a>
-    <a href="logout.php"
-         onclick="return confirm('Are you sure you want to logout?');"
-         class="logout-btn">Logout</a>
-  </nav>
-  </header>
+    <nav>
+      <a href="index.php">Home</a>
+      <a href="tournaments.php">Tournaments</a>
+      <a href="community.php">Community</a>
+      <a href="list.php">Games</a>
+      <a href="event.php" class="active">Events</a>
+      <a href="feedback.php">Feedback</a>
+      <a href="profile.php">My Profile</a>
+      <a href="logout.php"
+           onclick="return confirm('Are you sure you want to logout?');"
+           class="logout-btn">Logout</a>
+    </nav>
+</header>
 
   
 

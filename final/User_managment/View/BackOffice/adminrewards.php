@@ -63,6 +63,7 @@ $rewards = $rewardModel->getAll();
   <!-- ✅ keep your paths (fix if needed) -->
   <link rel="stylesheet" href="../../public/css/tournaments.css">
   <link rel="stylesheet" href="../../public/css/admin-rewards.css">
+  
 </head>
 <body>
 

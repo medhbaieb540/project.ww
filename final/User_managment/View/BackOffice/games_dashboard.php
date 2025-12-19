@@ -407,7 +407,7 @@ $deletedCount = count($deletedGames);
     <a href="admintour.php" class="nav-link">Tournaments</a>
     <a href="adminrewards.php" >Rewards</a>
     <a href="event/event.php" class="nav-link">Events</a>
-
+    
     <a href="#" class="nav-link" id="feedbackToggle">Feedback ▾</a>
     <div id="feedbackSubmenu" style="display:none; padding-left:12px;">
       <a href="admin_feedback.php" class="nav-link" style="padding:8px 0;">Dashboard</a>

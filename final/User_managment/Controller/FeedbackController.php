@@ -82,7 +82,8 @@ class FeedbackController
         string $message,
         string $author,
         string $role = 'player',
-        ?string $requestedStatus = null
+        ?string $requestedStatus = null,
+        ?int $user_id = null
     ): int {
         $game = $this->sanitize($game);
         $type = $this->sanitize($type);
@@ -108,7 +109,7 @@ class FeedbackController
         }
 
         $feedback = new Feedback(null, $game, $type, $message, $author, $status, null);
-        return $feedback->createFeedback($this->db);
+        return $feedback->createFeedback($this->db, $user_id);
     }
 
     public function updateStatus(int $id, string $status, string $role): bool

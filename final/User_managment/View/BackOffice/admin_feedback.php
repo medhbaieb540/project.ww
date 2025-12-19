@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? '') !== 'admin') {
+if (!isset($_SESSION['user_id']) || (($_SESSION['user_role'] ?? '') !== 'admin' && ($_SESSION['user_role'] ?? '') !== 'super_admin')) {
     header('Location: ../FrontOffice/feedback.php');
     exit();
 }
@@ -17,7 +17,7 @@ $topGames = $controller->getTopGames(5);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8">s
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Feedback | GameBridge</title>
   <link rel="stylesheet" href="../../public/css/styleAdmin.css">
@@ -35,8 +35,8 @@ $topGames = $controller->getTopGames(5);
     <a href="adminrewards.php" class="nav-link">Rewards</a>
     <a href="/gamebridge/final/User_managment/View/BackOffice/event/event.php" class="nav-link">Events</a>
 
-    <a href="#" class="nav-link" id="feedbackToggle">Feedback ▾</a>
-    <div id="feedbackSubmenu" style="display:none; padding-left:12px;">
+    <a href="#" class="nav-link" id="feedbackToggle">Feedback ▴</a>
+    <div id="feedbackSubmenu" style="display:block; padding-left:12px;">
       <a href="admin_feedback.php" class="nav-link active" style="padding:8px 0;">Dashboard</a>
       <a href="admin_feedback_manage.php" class="nav-link" style="padding:8px 0;">Manage</a>
       <a href="admin_feedback_analytics.php" class="nav-link" style="padding:8px 0;">Analytics</a>

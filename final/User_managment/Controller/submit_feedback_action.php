@@ -18,11 +18,12 @@ $type = $_POST['type'] ?? 'feedback';
 $message = $_POST['message'] ?? '';
 $status = $_POST['status'] ?? null;
 
+$user_id = $_SESSION['user_id'] ?? $_SESSION['id'] ?? null;
 $author = $_SESSION['username'] ?? 'anonymous';
 $role = $_SESSION['user_role'] ?? ($_SESSION['role'] ?? 'player');
 
 try {
-    $feedbackId = $controller->createFeedback($game, $type, $message, $author, $role, $status);
+    $feedbackId = $controller->createFeedback($game, $type, $message, $author, $role, $status, $user_id);
     echo json_encode([
         'success' => true,
         'message' => 'Feedback submitted successfully.',
@@ -35,3 +36,4 @@ try {
         'message' => $e->getMessage(),
     ]);
 }
+

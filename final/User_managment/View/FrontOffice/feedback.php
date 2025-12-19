@@ -18,7 +18,7 @@ $stats = $controller->getStats();
 $username = $_SESSION['username'] ?? 'Player';
 $userRole = $_SESSION['user_role'] ?? ($_SESSION['role'] ?? 'player');
 $returnToAdmin = isset($_GET['from']) && strpos($_GET['from'], 'admin_feedback') === 0;
-$backofficeUrl = '/gamebridge/final/User_managment/View/BackOffice/admin_feedback.php';
+$backofficeUrl = '../BackOffice/admin_feedback.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +26,7 @@ $backofficeUrl = '/gamebridge/final/User_managment/View/BackOffice/admin_feedbac
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GameBridge | Feedback</title>
+  <link rel="stylesheet" href="../../public/css/frontoffice-header.css">
   <link rel="stylesheet" href="../../public/css/stylefeedback.css">
 </head>
 <body>
@@ -35,11 +36,11 @@ $backofficeUrl = '/gamebridge/final/User_managment/View/BackOffice/admin_feedbac
     </div>
   <nav>
     <a href="index.php">Home</a>
-    <a href="list.php">Games</a>
     <a href="tournaments.php">Tournaments</a>
     <a href="community.php">Community</a>
+    <a href="list.php">Games</a>
     <a href="event.php">Events</a>
-    <a class="active" href="feedback.php">Feedback</a>
+    <a href="feedback.php" class="active">Feedback</a>
     <a href="profile.php">My Profile</a>
      <a href="logout.php"
          onclick="return confirm('Are you sure you want to logout?');"

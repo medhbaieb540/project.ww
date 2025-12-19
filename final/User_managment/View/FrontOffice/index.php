@@ -26,11 +26,8 @@
     <nav class="nav">
       <a class="nav-link active" href="index.html">Home</a>
       <a class="nav-link" href="list.php">Games</a>
-      <a class="nav-link" href="login.php">Tournaments</a>
-      <a class="nav-link" href="community.php">Community</a>
-      <a class="nav-link" href="event.php">Events</a>
-      <a class="nav-link" href="feedback.php">Feedback</a>
-      <a class="nav-link" href="login.php">Profile</a>
+      <a class="nav-link" href="tournaments.php">Tournaments</a>
+      <a class="nav-link" href="login.php">About</a>
       <a class="nav-link nav-cta" href="login.php">Login</a>
     </nav>
 

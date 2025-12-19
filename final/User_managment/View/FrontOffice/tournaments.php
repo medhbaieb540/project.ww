@@ -80,9 +80,11 @@ function tournament_image(string $name): string {
   </form>
 
   <!-- Dev controls -->
+  <?php if ($user_role === 'developer'): ?>
   <div class="dev-controls">
     <button id="openAddModal">+ Add Tournament (Dev)</button>
   </div>
+  <?php endif; ?>
 
   <div class="tournament-grid">
     <?php foreach ($tournaments as $t): ?>
